@@ -37,6 +37,15 @@ print(retrieved_message.decode("utf-8"))
 `retrieved_message` needs to be decoded if you didn't encrypt raw bytes.
 Output is "Test Message"
 
+### Ciphers
+You can create ciphers to improve performance. It should be used for sockets and stuff alike.
+```python3
+client_cipher, ciphertext = pqc.encryption.create_cipher(public_key) #ciphertext should be sent to client
+server_cipher = pqc.encryption.decrypt_cipher(private_key, ciphertext)
+print(server_cipher.decrypt(client_cipher.encrypt(message.encode('utf-8'))))
+print(client_cipher.decrypt(server_cipher.encrypt(message.encode('utf-8'))))
+```
+
 ## Signing and verifying
 **How signing works**
 ```python3
